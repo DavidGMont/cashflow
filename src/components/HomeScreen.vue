@@ -25,7 +25,10 @@
                 :date-label="new Date(Date.now()).toLocaleDateString('es-CO', options)"
                 :total-amount="1000000"
                 :amount="amount"
-            />
+            >
+                <template #graphic> graphic </template>
+                <template #action> action </template>
+            </ResumeIndex>
         </template>
         <template #movements>
             <MovementsScreen />

@@ -18,12 +18,23 @@
 
     const visualAmount = computed(() => (amount.value !== null ? amount.value : totalAmount.value));
     const visualLabel = computed(() => (label.value !== null ? label.value : dateLabel.value));
+    const currencyFormatter = new Intl.NumberFormat('es-CO', {
+        style: 'currency',
+        currency: 'COP',
+    });
+    const currencyAmount = computed(() => currencyFormatter.format(visualAmount.value));
 </script>
 
 <template>
     <main>
         <p>{{ visualLabel }}</p>
-        <h1>{{ visualAmount }}</h1>
+        <h1>{{ currencyAmount }}</h1>
+        <div class="graphic">
+            <slot name="graphic"></slot>
+        </div>
+        <div class="action">
+            <slot name="action"></slot>
+        </div>
     </main>
 </template>
 
