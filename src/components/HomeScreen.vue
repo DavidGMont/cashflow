@@ -29,7 +29,7 @@
             id: 2,
             title: 'Movimiento #3',
             description: 'Una compra de gusto culposo',
-            amount: 350000,
+            amount: -350000,
         },
         {
             id: 3,
@@ -41,7 +41,7 @@
             id: 4,
             title: 'Movimiento #5',
             description: 'Una compra de gusto culposo',
-            amount: 5000,
+            amount: -5000,
         },
         {
             id: 5,
@@ -59,13 +59,13 @@
             id: 7,
             title: 'Movimiento #8',
             description: 'Una compra de gusto culposo',
-            amount: 16000,
+            amount: -16000,
         },
         {
             id: 8,
             title: 'Movimiento #9',
             description: 'Una compra de gusto culposo',
-            amount: 850000,
+            amount: -850000,
         },
         {
             id: 9,
