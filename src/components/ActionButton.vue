@@ -2,7 +2,52 @@
     <button @click="showModal = true">Agregar movimiento</button>
     <Teleport to="#app">
         <ModalScreen v-show="showModal" @close="showModal = false">
-            Teletransportado 🛸👽
+            <form action="post" @submit.prevent="submit">
+                <div class="field">
+                    <label for="title">Título</label>
+                    <input type="text" name="title" id="title" v-model="title" />
+                </div>
+                <div class="field">
+                    <label for="amount">Monto</label>
+                    <input type="number" name="amount" id="amount" v-model="amount" />
+                </div>
+                <div class="field">
+                    <label for="description">Descripción</label>
+                    <textarea
+                        name="description"
+                        id="description"
+                        cols="30"
+                        rows="4"
+                        v-model="description"
+                    ></textarea>
+                </div>
+                <div class="field">
+                    Tipo de movimiento
+                    <label for="movement-type" class="radio-label">
+                        <input
+                            type="radio"
+                            name="movement-type"
+                            id="movement-type"
+                            value="Ingreso"
+                            v-model="movementType"
+                        />
+                        <span>Ingreso</span>
+                    </label>
+                    <label for="movement-type" class="radio-label">
+                        <input
+                            type="radio"
+                            name="movement-type"
+                            id="movement-type"
+                            value="Gasto"
+                            v-model="movementType"
+                        />
+                        <span>Gasto</span>
+                    </label>
+                </div>
+                <div class="action">
+                    <button>Agregar movimiento</button>
+                </div>
+            </form>
         </ModalScreen>
     </Teleport>
 </template>
@@ -12,6 +57,12 @@
     import ModalScreen from './ModelScreen.vue';
 
     const showModal = ref(false);
+    const title = ref('');
+    const amount = ref(0);
+    const description = ref('');
+    const movementType = ref('Ingreso');
+
+    const submit = () => (showModal.value = !showModal.value);
 </script>
 
 <style scoped lang="scss">
@@ -28,6 +79,7 @@
     form {
         font-size: 1.24rem;
         width: 100%;
+        background: #fff;
         .action {
             padding: 0 24px;
         }
