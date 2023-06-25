@@ -4,6 +4,7 @@
     import HeaderComponent from './HeaderComponent.vue';
     import MovementsScreen from './Movements/MovementsScreen.vue';
     import ResumeIndex from './Resume/ResumeIndex.vue';
+    import ActionButton from './ActionButton.vue';
     const label = ref(null);
     const amount = ref(null);
     const options = {
@@ -89,7 +90,9 @@
                 :amount="amount"
             >
                 <template #graphic> graphic </template>
-                <template #action> action </template>
+                <template #action>
+                    <ActionButton />
+                </template>
             </ResumeIndex>
         </template>
         <template #movements>
