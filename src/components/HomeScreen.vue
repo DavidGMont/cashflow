@@ -2,7 +2,7 @@
     import { ref } from 'vue';
     import LayoutComponent from './LayoutComponent.vue';
     import HeaderComponent from './HeaderComponent.vue';
-    import MovementsScreen from './MovementsScreen.vue';
+    import MovementsScreen from './Movements/MovementsScreen.vue';
     import ResumeIndex from './Resume/ResumeIndex.vue';
     const label = ref(null);
     const amount = ref(null);
@@ -12,6 +12,68 @@
         month: 'long',
         day: 'numeric',
     };
+    const movements = [
+        {
+            id: 0,
+            title: 'Movimiento #1',
+            description: 'Una compra de gusto culposo',
+            amount: 100000,
+        },
+        {
+            id: 1,
+            title: 'Movimiento #2',
+            description: 'Una compra de gusto culposo',
+            amount: 200000,
+        },
+        {
+            id: 2,
+            title: 'Movimiento #3',
+            description: 'Una compra de gusto culposo',
+            amount: 350000,
+        },
+        {
+            id: 3,
+            title: 'Movimiento #4',
+            description: 'Una compra de gusto culposo',
+            amount: 10000,
+        },
+        {
+            id: 4,
+            title: 'Movimiento #5',
+            description: 'Una compra de gusto culposo',
+            amount: 5000,
+        },
+        {
+            id: 5,
+            title: 'Movimiento #6',
+            description: 'Una compra de gusto culposo',
+            amount: 500000,
+        },
+        {
+            id: 6,
+            title: 'Movimiento #7',
+            description: 'Una compra de gusto culposo',
+            amount: 1400000,
+        },
+        {
+            id: 7,
+            title: 'Movimiento #8',
+            description: 'Una compra de gusto culposo',
+            amount: 16000,
+        },
+        {
+            id: 8,
+            title: 'Movimiento #9',
+            description: 'Una compra de gusto culposo',
+            amount: 850000,
+        },
+        {
+            id: 9,
+            title: 'Movimiento #10',
+            description: 'Una compra de gusto culposo',
+            amount: 99000,
+        },
+    ];
 </script>
 
 <template>
@@ -31,7 +93,7 @@
             </ResumeIndex>
         </template>
         <template #movements>
-            <MovementsScreen />
+            <MovementsScreen :movements="movements" />
         </template>
     </LayoutComponent>
 </template>
