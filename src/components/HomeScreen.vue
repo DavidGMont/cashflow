@@ -14,6 +14,7 @@
         month: 'long',
         day: 'numeric',
     };
+    const amounts = [100, 200, 500, 200, -400, -600, -300, 0, 300, 500];
     const movements = [
         {
             id: 0,
@@ -91,7 +92,7 @@
                 :amount="amount"
             >
                 <template #graphic>
-                    <GraphicComponent />
+                    <GraphicComponent :amounts="amounts" />
                 </template>
                 <template #action>
                     <ActionButton />
