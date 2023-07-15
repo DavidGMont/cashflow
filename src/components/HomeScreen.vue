@@ -5,6 +5,7 @@
     import MovementsScreen from './Movements/MovementsScreen.vue';
     import ResumeIndex from './Resume/ResumeIndex.vue';
     import ActionButton from './ActionButton.vue';
+    import GraphicComponent from './Resume/GraphicComponent.vue';
     const label = ref(null);
     const amount = ref(null);
     const options = {
@@ -89,7 +90,9 @@
                 :total-amount="1000000"
                 :amount="amount"
             >
-                <template #graphic> graphic </template>
+                <template #graphic>
+                    <GraphicComponent />
+                </template>
                 <template #action>
                     <ActionButton />
                 </template>
