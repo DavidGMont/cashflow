@@ -31,7 +31,7 @@
         margin: 0;
         font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
     }
-    
+
     .app {
         min-height: 100vh;
     }

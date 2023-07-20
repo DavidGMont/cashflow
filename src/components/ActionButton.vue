@@ -2,7 +2,7 @@
     <button @click="showModal = true">Agregar movimiento</button>
     <Teleport to="#app">
         <ModalScreen v-show="showModal" @close="showModal = false">
-            <form action="post" @submit.prevent="submit">
+            <form @submit.prevent="submit">
                 <div class="field">
                     <label for="title">Título</label>
                     <input type="text" name="title" id="title" v-model="title" />
@@ -62,17 +62,17 @@
     const description = ref('');
     const movementType = ref('Ingreso');
 
-    const emit = defineEmits(["create"]);
+    const emit = defineEmits(['create']);
 
     const submit = () => {
         showModal.value = !showModal.value;
-        emit("create", {
+        emit('create', {
             id: Date.now(),
             title: title.value,
             description: description.value,
             amount: movementType.value === 'Ingreso' ? amount.value : -amount.value,
             time: new Date(),
-        })
+        });
     };
 </script>
 
