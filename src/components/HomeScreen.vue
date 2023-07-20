@@ -1,11 +1,12 @@
 <script setup>
-    import { computed, ref } from 'vue';
+    import { computed, onMounted, ref } from 'vue';
     import LayoutComponent from './LayoutComponent.vue';
     import HeaderComponent from './HeaderComponent.vue';
     import MovementsScreen from './Movements/MovementsScreen.vue';
     import ResumeIndex from './Resume/ResumeIndex.vue';
     import ActionButton from './ActionButton.vue';
     import GraphicComponent from './Resume/GraphicComponent.vue';
+
     const label = ref(null);
     const amount = ref(null);
     const options = {
@@ -19,95 +20,34 @@
             .filter((m) => {
                 const today = new Date();
                 const oldDate = today.setDate(today.getDate() - 30);
-                return m.time > oldDate;
+                return m?.time > oldDate;
             })
-            .map((m) => m.amount);
+            .map((m) => m?.amount);
         return lastDays.map((m, i) => {
             const lastMovements = lastDays.slice(0, i);
-            return lastMovements.reduce((summatory, movement) => summatory + movement, 0);
+            return lastMovements.reduce((summary, movement) => summary + movement, 0);
         });
     });
-    const movements = ref([
-        {
-            id: 0,
-            title: 'Movimiento #1',
-            description: 'Una compra de gusto culposo',
-            amount: 100000,
-            time: new Date('07-15-2023'),
-        },
-        {
-            id: 1,
-            title: 'Movimiento #2',
-            description: 'Una compra de gusto culposo',
-            amount: 200000,
-            time: new Date('07-15-2023'),
-        },
-        {
-            id: 2,
-            title: 'Movimiento #3',
-            description: 'Una compra de gusto culposo',
-            amount: -350000,
-            time: new Date('07-15-2023'),
-        },
-        {
-            id: 3,
-            title: 'Movimiento #4',
-            description: 'Una compra de gusto culposo',
-            amount: 10000,
-            time: new Date('07-15-2023'),
-        },
-        {
-            id: 4,
-            title: 'Movimiento #5',
-            description: 'Una compra de gusto culposo',
-            amount: -5000,
-            time: new Date('07-15-2023'),
-        },
-        {
-            id: 5,
-            title: 'Movimiento #6',
-            description: 'Una compra de gusto culposo',
-            amount: 500000,
-            time: new Date('07-15-2023'),
-        },
-        {
-            id: 6,
-            title: 'Movimiento #7',
-            description: 'Una compra de gusto culposo',
-            amount: 1400000,
-            time: new Date('07-16-2023'),
-        },
-        {
-            id: 7,
-            title: 'Movimiento #8',
-            description: 'Una compra de gusto culposo',
-            amount: -16000,
-            time: new Date('07-16-2023'),
-        },
-        {
-            id: 8,
-            title: 'Movimiento #9',
-            description: 'Una compra de gusto culposo',
-            amount: -850000,
-            time: new Date('07-16-2023'),
-        },
-        {
-            id: 9,
-            title: 'Movimiento #10',
-            description: 'Una compra de gusto culposo',
-            amount: 99000,
-            time: new Date('07-16-2023'),
-        },
-    ]);
+    const movements = ref([]);
+    const totalAmount = computed(() =>
+        movements.value.reduce((summary, m) => summary + m?.amount, 0)
+    );
+    onMounted(() => {
+        const savedMovements = JSON.parse(localStorage.getItem('movements'));
+        if (Array.isArray(savedMovements)) {
+            movements.value = savedMovements?.map((m) => ({ ...m, time: new Date(m?.time) }));
+        }
+    });
     const create = (movement) => {
-        console.log(movement);
         movements.value.push(movement);
+        save();
     };
     const remove = (id) => {
-        console.log(id);
-        const index = movements.value.findIndex((m) => m.id === id);
+        const index = movements.value.findIndex((m) => m?.id === id);
         movements.value.splice(index, 1);
+        save();
     };
+    const save = () => localStorage.setItem('movements', JSON.stringify(movements.value));
 </script>
 
 <template>
@@ -117,10 +57,10 @@
         </template>
         <template #resume>
             <ResumeIndex
-                :label="label"
-                :date-label="new Date(Date.now()).toLocaleDateString('es-CO', options)"
-                :total-amount="1000000"
                 :amount="amount"
+                :date-label="new Date(Date.now()).toLocaleDateString('es-CO', options)"
+                :label="label"
+                :total-amount="totalAmount"
             >
                 <template #graphic>
                     <GraphicComponent :amounts="amounts" />

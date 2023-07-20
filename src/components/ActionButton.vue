@@ -73,6 +73,10 @@
             amount: movementType.value === 'Ingreso' ? amount.value : -amount.value,
             time: new Date(),
         });
+        title.value = '';
+        description.value = '';
+        amount.value = 0;
+        movementType.value = 'Ingreso';
     };
 </script>
 
@@ -87,23 +91,28 @@
         border-radius: 60px;
         box-sizing: border-box;
     }
+
     form {
         font-size: 1.24rem;
         width: 100%;
         background: #fff;
+
         .action {
             padding: 0 24px;
         }
     }
+
     .field {
         display: flex;
         justify-content: space-between;
         flex-direction: column;
         padding: 16px 24px;
     }
+
     label {
         margin-bottom: 8px;
     }
+
     input,
     textarea {
         font-size: 1.24rem;
@@ -111,18 +120,22 @@
         border-radius: 8px;
         padding: 8px;
     }
+
     input[type='number'] {
         text-align: right;
     }
+
     .radio-label {
         display: flex;
         align-items: center;
         margin-top: 8px;
+
         span {
             margin-top: 4px;
             margin-left: 8px;
         }
     }
+
     input[type='radio'] {
         appearance: none;
         width: 1.24rem;
@@ -131,6 +144,7 @@
         border: 2px solid var(--brand-blue);
         border-radius: 50%;
     }
+
     input[type='radio']:checked {
         background-color: var(--brand-blue);
     }
