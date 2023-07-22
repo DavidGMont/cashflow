@@ -24,7 +24,7 @@
             })
             .map((m) => m?.amount);
         return lastDays.map((m, i) => {
-            const lastMovements = lastDays.slice(0, i);
+            const lastMovements = lastDays.slice(0, i + 1);
             return lastMovements.reduce((summary, movement) => summary + movement, 0);
         });
     });
@@ -48,6 +48,7 @@
         save();
     };
     const save = () => localStorage.setItem('movements', JSON.stringify(movements.value));
+    const select = (el) => (amount.value = el);
 </script>
 
 <template>
@@ -63,7 +64,7 @@
                 :total-amount="totalAmount"
             >
                 <template #graphic>
-                    <GraphicComponent :amounts="amounts" />
+                    <GraphicComponent :amounts="amounts" @select="select" />
                 </template>
                 <template #action>
                     <ActionButton @create="create" />
